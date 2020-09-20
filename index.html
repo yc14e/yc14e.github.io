@@ -38,13 +38,11 @@ function LaunchPrivate()
 function LaunchPublic()
 {
 	var repoName= document.isFormPublic.repoName.value;
-	alert(5);
 	var url = "https://mybinder.org/v2/gh/" 
 		+ id + "/" + sandbox + 
 		"/master?urlpath=git-pull?repo=https://github.com/" 
 		+ id + "/" + repoName + 
 		"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
-	alert(url);
 
 	window.open(url, "_self"); 	
 }
