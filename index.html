@@ -8,13 +8,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-function Launch()
-{
-	var id = "yc14e";
-	var sandbox = "binder-sandbox";
 
-	var repoName= document.isForm.repoName.value;
-	var password = document.isForm.password.value;
+var id = "yc14e";
+var sandbox = "binder-sandbox";
+
+
+function LaunchPrivate()
+{
+	var repoName= document.isFormPrivate.repoName.value;
+	var password = document.isFormPrivate.password.value;
 	
 	// token is encrypted like this: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
 	
@@ -32,16 +34,50 @@ function Launch()
 
 	window.open(url, "_self"); 
 }
+
+function LaunchPublic()
+{
+	var repoName= document.isFormPublic.repoName.value;
+	alert(5);
+	var url = "https://mybinder.org/v2/gh/" 
+		+ id + "/" + sandbox + 
+		"/master?urlpath=git-pull?repo=https://github.com/" 
+		+ id + "/" + repoName + 
+		"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
+	alert(url);
+
+	window.open(url, "_self"); 	
+}
+
 </script>
 <center>
 
-<form name="isForm">
-<p><B>Launch in a Could Workspace</B></p>
 
+<form name="title">
+<p><B>Launch in a Could Workspace</B></p>
+</form>
+
+
+<form name="isFormPublic">
+<p><B>Public Repository: </B></p>
 <table border=0>
 <tr>
 <td>Repository name</td>
+<td><input name="repoName" value=""></td>
+</tr>
+</table>						
+<p>
+<input type=button name="go" value="Launch" onClick="LaunchPublic();return true;">
+</p>					
+</form>
 
+
+
+<form name="isFormPrivate">
+<p><B>Private Repository: </B></p>
+<table border=0>
+<tr>
+<td>Repository name</td>
 <td><input name="repoName" value=""></td>
 </tr>
 <tr>
@@ -49,9 +85,8 @@ function Launch()
 <td><input type="password", name="password" value=""></td>
 </tr>
 </table>						
-
 <p>
-<input type=button name="go" value="Launch" onClick="Launch();return true;">
+<input type=button name="go" value="Launch" onClick="LaunchPrivate();return true;">
 </p>					
 </form>
 
