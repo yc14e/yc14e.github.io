@@ -13,78 +13,75 @@ var id = "yc14e";
 var sandbox = "binder-sandbox";
 
 
-function LaunchPrivate()
+function Launch()
 {
-	var repoName= document.isFormPrivate.repoName.value;
-	var password = document.isFormPrivate.password.value;
-	
-	// token is encrypted like this: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
-	
-	var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX19KmSf4sEooOtmk/5Z9xaw243+XGY3wkYd1aRlWqzu+BjiEu2SDFL0m0S6R6HIrgJHMGR9v358CgA==", password)
-	var token = decrypted.toString(CryptoJS.enc.Utf8);
+	var repoName = document.isForm.repoName.value;
+	var repoType = document.isForm.repoType.value;
 
-	var url = "https://mybinder.org/v2/gh/" 
-		+ id + "/" + sandbox 
-		+ "/master?urlpath=git-pull?repo=https://" 
-		+ token 
-		+ "@github.com/" 
-		+ id + "/" + repoName
-		+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
-		+ repoName + "?autodecode";
+	if (repoType=="Public")
+	{
+		var url = "https://mybinder.org/v2/gh/" 
+			+ id + "/" + sandbox + 
+			"/master?urlpath=git-pull?repo=https://github.com/" 
+			+ id + "/" + repoName + 
+			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
+	} 
+	else if (repoType=="Private")
+	{
+		// Private repo needs password to launch
+		// The encreypted token below is from: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
 
+		var password = document.isForm.password.value;	
+		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX19KmSf4sEooOtmk/5Z9xaw243+XGY3wkYd1aRlWqzu+BjiEu2SDFL0m0S6R6HIrgJHMGR9v358CgA==", password)
+		var token = decrypted.toString(CryptoJS.enc.Utf8);
+
+		var url = "https://mybinder.org/v2/gh/" 
+			+ id + "/" + sandbox 
+			+ "/master?urlpath=git-pull?repo=https://" 
+			+ token 
+			+ "@github.com/" 
+			+ id + "/" + repoName
+			+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+			+ repoName + "?autodecode";
+	}
 	window.open(url, "_self"); 
 }
 
-function LaunchPublic()
-{
-	var repoName= document.isFormPublic.repoName.value;
-	var url = "https://mybinder.org/v2/gh/" 
-		+ id + "/" + sandbox + 
-		"/master?urlpath=git-pull?repo=https://github.com/" 
-		+ id + "/" + repoName + 
-		"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
 
-	window.open(url, "_self"); 	
+function change(repoType) {
+	if (repoType.value === "Public") {
+		document.isForm.password.disabled = true;
+	} else {
+		document.isForm.password.disabled = false;
+	}
 }
 
 </script>
 <center>
 
 
-<form name="title">
+<form name="isForm">
 <p><B>Launch in a Could Workspace</B></p>
-</form>
-
-
-<form name="isFormPublic">
-<p><B>Public Repository: </B></p>
 <table border=0>
 <tr>
-<td>Repository name</td>
-<td><input name="repoName" value=""></td>
+<td>Repository type</td>
+<td>	<select name="repoType" size=1 onchange="change(this)">
+	<option value="Public">Public</option>
+	<option value="Private">Private</option>
+	</select>
+</td>
 </tr>
-</table>						
-<p>
-<input type=button name="go" value="Launch" onClick="LaunchPublic();return true;">
-</p>					
-</form>
-
-
-
-<form name="isFormPrivate">
-<p><B>Private Repository: </B></p>
-<table border=0>
 <tr>
 <td>Repository name</td>
 <td><input name="repoName" value=""></td>
 </tr>
 <tr>
 <td>Github password</td>
-<td><input type="password", name="password" value=""></td>
+<td><input type="password", name="password" value="" disabled=true></td>
 </tr>
 </table>						
 <p>
-<input type=button name="go" value="Launch" onClick="LaunchPrivate();return true;">
+<input type=button name="go" value="Launch" onClick="Launch();return true;">
 </p>					
 </form>
 
