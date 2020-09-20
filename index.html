@@ -15,35 +15,42 @@ var sandbox = "binder-sandbox";
 
 function Launch()
 {
-	var id = document.isForm.id.value;
-	var repoName = document.isForm.repoName.value;
-	var repoType = document.isForm.repoType.value;
-
-	if (repoType=="Public")
-	{
-		var url = "https://mybinder.org/v2/gh/" 
-			+ sandoxId + "/" + sandbox + 
-			"/master?urlpath=git-pull?repo=https://github.com/" 
-			+ id + "/" + repoName + 
-			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
-			+ repoName + "?autodecode";
-	} 
-	else if (repoType=="Private")
-	{
-		// Private repo needs a personal token to launch
-
-		var token = document.isForm.token.value;
-
-		var url = "https://mybinder.org/v2/gh/" 
-			+ sandoxId + "/" + sandbox 
-			+ "/master?urlpath=git-pull?repo=https://" 
-			+ token 
-			+ "@github.com/" 
-			+ id + "/" + repoName
-			+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
-			+ repoName + "?autodecode";
-	}
-	window.open(url, "_self"); 
+    var id = document.isForm.id.value;
+    var repoName = document.isForm.repoName.value;
+    var repoType = document.isForm.repoType.value;
+    
+    if (id=="" && repoName=="")
+    {
+        var url = "https://mybinder.org/v2/gh/" 
+                    + sandoxId + "/" + sandbox + 
+                    "/master?urlpath=lab";
+    }
+    else
+    {
+        if (repoType=="Public")
+        {
+            var url = "https://mybinder.org/v2/gh/" 
+                        + sandoxId + "/" + sandbox + 
+                        "/master?urlpath=git-pull?repo=https://github.com/" 
+                        + id + "/" + repoName + 
+                        "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+                        + repoName + "?autodecode";
+        } 
+        else if (repoType=="Private")
+        {
+            // Private repo needs a personal token to launch
+                var token = document.isForm.token.value;
+                var url = "https://mybinder.org/v2/gh/" 
+                            + sandoxId + "/" + sandbox 
+                            + "/master?urlpath=git-pull?repo=https://" 
+                            + token 
+                            + "@github.com/" 
+                            + id + "/" + repoName
+                            + "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+                            + repoName + "?autodecode";
+        }
+    }
+    window.open(url, "_self"); 
 }
 
 
@@ -83,13 +90,13 @@ div{
 }
 /* =Structures-------------------------------------------------------------- */
 .wrap{
-    max-width: 900px;
+    max-width: 920px;
     margin: 0 auto;
     padding: 1em;
 }
 #primary{
     padding: 10px;
-    max-width: 900px;
+    max-width: 920px;
     margin: 0 auto;
 }
 #secondary{
@@ -127,7 +134,7 @@ div{
  
                 <div id="primary">
                     <div id="content" role="main">
-			<p><font size="6" color=#999999>Launch a JupyterLab workspace in the cloud and pull any GitHub repo into it</font></p>
+			<p><font size="6" color=#999999>Launch a JupyterLab workspace in the cloud and pull source from any GitHub repo into it</font></p>
 			<p><font size="4">While Binder supports JupyterLab, <a href="http://mybinder.org">mybinder.org</a> only generates links to open repositories in the classic Jupyter Notebook interface. Through the below launcher you can open any GitHub repository in JupyterLab.</font></p>
 
 
@@ -140,12 +147,12 @@ div{
 
 	                <tr>
         	        <td>Github username</td>
-                	<td><input name="id" value="jupyterhub"></td>
+                	<td><input name="id" value=""></td>
 	                </tr>
 
                 	<tr>
 	                <td>Repository name</td>
-        	        <td><input name="repoName" value="mybinder.org-deploy"></td>
+        	        <td><input name="repoName" value=""></td>
                 	</tr>
 
 	                <tr>
@@ -176,20 +183,30 @@ div{
 
 
 			<div id="secondary" align="left">
-				<p><font size="5">1. Enter your repository information</font></p>
-				
-				<p><font size="3">For example if you want to pull this GitHub repository: <a href="https://github.com/jupyterhub/mybinder.org-deploy">https://github.com/jupyterhub/mybinder.org-deploy</a>, just enter jupyterhub as the GitHub username and mybinder.org-deploy as the Repository name. If you want to pull your own private repository, you will need a Personal access token. You can generate one in your GitHub profile > "Settings" > "Developer settings" > "Personal access tokens" > "Generate new token". This webpage is purely static (check out source <a href="https://github.com/yc14e/yc14e.github.io/blob/master/index.html">here</a>) and will not keep your token in any way. </font></p>
+				<p><font size="5">1. Enter your repository information (optional)</font></p>
+				<p><font size="3">
+				<ul>
+					<li>For example if you want to pull from this GitHub repository: <a href="https://github.com/jupyterhub/mybinder.org-deploy">https://github.com/jupyterhub/mybinder.org-deploy</a>, just enter jupyterhub as the GitHub username and mybinder.org-deploy as the Repository name. </li>
+					<li>If you want to pull from your own private repository, you will need a Personal access token. You can generate one in your GitHub profile > "Settings" > "Developer settings" > "Personal access tokens" > "Generate new token". This webpage is purely static (check out <a href="https://github.com/yc14e/yc14e.github.io/blob/master/index.html">source</a>) and will not keep your token in any way. </li>
+					<li>If you just want to launch a clean JupyterLab session without pulling source from any repository, then leave everything blank. Just click on the launch button. </li>
+				</ul>
+				</font></p>
 			</div><!-- #secondary --> 
 			<div id="secondary" align="left">
 				<p><font size="5">2. A Docker image is already built for you</font></p>
-				<p><font size="3">Currently the built-in kernels are
+				<p><font size="3">
 				<ul>
-					<li>Python 3</li>
-					<li>Bash</li>
-					<li>C++ (xeus-cling 0.10.0)</li>
-					<li>xpython (xeus-python 0.8.0) which supports python debugger.</li>
+					<li>Currently installed kernels are
+					<ul>
+						<li>Python 3</li>
+						<li>Bash</li>
+						<li>C++ (xeus-cling 0.10.0)</li>
+						<li>xpython (xeus-python 0.8.0) which supports python debugger.</li>
+					</ul>
+					</li>
+					<li>Most common python packages such as numpy, scipy, pandas are also installed. See <a href="https://github.com/yc14e/binder-sandbox/blob/master/binder/environment.yml">my conda environment settings</a> for a complete list. New kernels/packages can be added upon request. Please create a GitHub issue <a href="https://github.com/yc14e/binder-sandbox/issues">here</a>. </li>
 				</ul>
-				Most common python packages such as numpy, scipy, pandas are also built in. See <a href="https://github.com/yc14e/binder-sandbox/blob/master/binder/environment.yml">my conda environment settings</a> for a complete list. New kernels/packages can be added upon request. Please create a GitHub issue <a href="https://github.com/yc14e/binder-sandbox/issues">here</a>. </font></p>
+			</font></p>
 			</div><!-- #secondary --> 
 
 
@@ -197,9 +214,9 @@ div{
 				<p><font size="5">3. Things to look out</font></p>
 				<p><font size="3">
 				<ul>
-					<li>Binder will shut down user sessions after 10 minutes of inactivity, but still launching a repository in JupyterLab is a great way to test/edit small things, especially for repositories full of Jupyter notebooks. Also an extension jupyter-offlinenotebook is built in so that notebooks can be saved to and loaded from browser storage even when the server is  down. </li>
+					<li>Binder will shut down user sessions after 10 minutes of inactivity, but still launching a repository in JupyterLab is a great way to test/edit small things, especially for repositories full of Jupyter notebooks. Also an extension jupyter-offlinenotebook is installed so that notebooks can be saved to and loaded from browser storage even when the server is  down. </li>
 					<li>There is no persistent storage. If you want to keep your change, please commit and push back to GitHub in the Terminal in JupyterLab. </li>
-</font></p>
+				</font></p>
 			</div><!-- #secondary --> 
 
 
