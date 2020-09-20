@@ -1,42 +1,41 @@
 <html>
 <HEAD>
-<TITLE>Login page</TITLE>
+<TITLE>Binder JupyterLab Launcher</TITLE>
 </HEAD>
-<body bgcolor="#e7e7e7">
+<body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 
-var id = "yc14e";
+var sandoxId = "yc14e";
 var sandbox = "binder-sandbox";
 
 
 function Launch()
 {
+	var id = document.isForm.id.value;
 	var repoName = document.isForm.repoName.value;
 	var repoType = document.isForm.repoType.value;
 
 	if (repoType=="Public")
 	{
 		var url = "https://mybinder.org/v2/gh/" 
-			+ id + "/" + sandbox + 
+			+ sandoxId + "/" + sandbox + 
 			"/master?urlpath=git-pull?repo=https://github.com/" 
 			+ id + "/" + repoName + 
-			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
+			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+			+ repoName + "?autodecode";
 	} 
 	else if (repoType=="Private")
 	{
-		// Private repo needs password to launch
-		// The encreypted token below is from: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
+		// Private repo needs a personal token to launch
 
-		var password = document.isForm.password.value;	
-		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX19KmSf4sEooOtmk/5Z9xaw243+XGY3wkYd1aRlWqzu+BjiEu2SDFL0m0S6R6HIrgJHMGR9v358CgA==", password)
-		var token = decrypted.toString(CryptoJS.enc.Utf8);
+		var token = document.isForm.token.value;
 
 		var url = "https://mybinder.org/v2/gh/" 
-			+ id + "/" + sandbox 
+			+ sandoxId + "/" + sandbox 
 			+ "/master?urlpath=git-pull?repo=https://" 
 			+ token 
 			+ "@github.com/" 
@@ -50,42 +49,190 @@ function Launch()
 
 function change(repoType) {
 	if (repoType.value === "Public") {
-		document.isForm.password.disabled = true;
+		document.isForm.token.disabled = true;
 	} else {
-		document.isForm.password.disabled = false;
+		document.isForm.token.disabled = false;
 	}
 }
 
 </script>
+
+
+<style type="text/css">
+/* =Reset -------------------------------------------------------------- */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 0;
+}
+html,
+body,
+div{
+    margin: 0;
+    padding: 0;
+    line-height:250%;
+}
+/* =Color ------------------------------------------------------------- */
+#header{
+    background: #ffffff;
+}
+ 
+#main{
+    background: #ffffff;
+}
+/* =Structures-------------------------------------------------------------- */
+.wrap{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1em;
+}
+#primary{
+    padding: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+#secondary{
+    padding: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height:180%;
+}
+</style>
+
+
+
+
+
 <center>
 
 
-<form name="isForm">
-<p><B>Launch in a Could Workspace</B></p>
-<table border=0>
-<tr>
-<td>Repository type</td>
-<td>	<select name="repoType" size=1 onchange="change(this)">
-	<option value="Public">Public</option>
-	<option value="Private">Private</option>
-	</select>
-</td>
-</tr>
-<tr>
-<td>Repository name</td>
-<td><input name="repoName" value=""></td>
-</tr>
-<tr>
-<td>Github password</td>
-<td><input type="password", name="password" value="" disabled=true></td>
-</tr>
-</table>						
-<p>
-<input type=button name="go" value="Launch" onClick="Launch();return true;">
-</p>					
-</form>
+
+<body>
+    <div id="page">
+        <div id="header" class="site-header">
+            <div class="wrap">
+ 
+                <div id="branding" role="banner">
+			<p align="center">
+			    <img src="binder-logo.png">
+			</p>
+                </div><!--#branding-->
+ 
+            </div><!--.wrap-->
+        </div><!--#header-->
+ 
+        <div id="main">
+            <div class="wrap">
+ 
+                <div id="primary">
+                    <div id="content" role="main">
+			<p><font size="6" color=#999999>Launch a JupyterLab workspace in the cloud and pull any GitHub repo into it</font></p>
+			<p><font size="4">While Binder supports JupyterLab, <a href="http://mybinder.org">mybinder.org</a> only generates links to open repositories in the classic Jupyter Notebook interface. Through the below launcher you can open any GitHub repository in JupyterLab.</font></p>
+
+
+
+			<div style="background-color:rgb(235, 236, 237)">
+	                <form name="isForm">
+			<table><tr><td></td></tr></table><table><tr><td></td></tr></table>
+        	        <p><span style='font-size:15pt'>Launch in a Could Workspace</span></p>
+                	<table border=0>
+
+	                <tr>
+        	        <td>Github username</td>
+                	<td><input name="id" value="jupyterhub"></td>
+	                </tr>
+
+                	<tr>
+	                <td>Repository name</td>
+        	        <td><input name="repoName" value="mybinder.org-deploy"></td>
+                	</tr>
+
+	                <tr>
+        	        <td>Repository type</td>
+                	<td><select name="repoType" size=1 onchange="change(this)">
+        	            <option value="Public">Public</option>
+	                    <option value="Private">Private</option>
+                	    </select>
+	                </td>
+        	        </tr>
+
+	                <tr>
+        	        <td>Personal access token</td>
+                	<td><input type="password", name="token" value="" disabled=true></td>
+	                </tr>
+        	        </table>
+			<table><tr><td></td></tr></table><table><tr><td></td></tr></table><table><tr><td></td></tr></table>
+                	<p>
+	                <input type=button name="go" value="launch" onClick="Launch();return true;">
+        	        </p>
+			<table><tr><td></td></tr></table>
+                	</form>
+			</div>
+
+			<div id="primary">
+			<p><font size="6" color=#999999>How it works</font></p>
+			</div>
+
+
+			<div id="secondary" align="left">
+				<p><font size="5">1. Enter your repository information</font></p>
+				
+				<p><font size="3">For example if you want to pull this GitHub repository: <a href="https://github.com/jupyterhub/mybinder.org-deploy">https://github.com/jupyterhub/mybinder.org-deploy</a>, just enter jupyterhub as the GitHub username and mybinder.org-deploy as the Repository name. If you want to pull your own private repository, you will need a Personal access token. You can generate one in your GitHub profile > "Settings" > "Developer settings" > "Personal access tokens" > "Generate new token". This webpage is purely static (check out source <a href="https://github.com/yc14e/yc14e.github.io/blob/master/index.html">here</a>) and will not keep your token in any way. </font></p>
+			</div><!-- #secondary --> 
+			<div id="secondary" align="left">
+				<p><font size="5">2. A Docker image is already built for you</font></p>
+				<p><font size="3">Currently the built-in kernels are
+				<ul>
+					<li>Python 3</li>
+					<li>Bash</li>
+					<li>C++ (xeus-cling 0.10.0)</li>
+					<li>xpython (xeus-python 0.8.0) which supports python debugger.</li>
+				</ul>
+				Most common python packages such as numpy, scipy, pandas are also built in. See <a href="https://github.com/yc14e/binder-sandbox/blob/master/binder/environment.yml">my conda environment settings</a> for a complete list. New kernels/packages can be added upon request. Please create a GitHub issue <a href="https://github.com/yc14e/binder-sandbox/issues">here</a>. </font></p>
+			</div><!-- #secondary --> 
+
+
+			<div id="secondary" align="left">
+				<p><font size="5">3. Things to look out</font></p>
+				<p><font size="3">
+				<ul>
+					<li>Binder will shut down user sessions after 10 minutes of inactivity, but still launching a repository in JupyterLab is a great way to test/edit small things, especially for repositories full of Jupyter notebooks. Also an extension jupyter-offlinenotebook is built in so that notebooks can be saved to and loaded from browser storage even when the server is  down. </li>
+					<li>There is no persistent storage. If you want to keep your change, please commit and push back to GitHub in the Terminal in JupyterLab. </li>
+</font></p>
+			</div><!-- #secondary --> 
+
+
+
+
+                    </div><!-- #content -->
+                </div><!-- #primary -->
+ 
+            </div><!--.wrap-->
+        </div><!--#main-->
+ 
+        <div id="footer" class="site-footer">
+            <div class="wrap">
+ 
+ 
+            </div><!--.wrap-->
+        </div><!--#footer-->
+ 
+    </div><!--#page-->
+</body>
+
+
+
+
+<div></div>
+<div align="center"></div>
+<div align="center"><span style='font-size:12pt'></span></div>
+
+
+
 
  
 </center>
 </body>
 </html>
+
