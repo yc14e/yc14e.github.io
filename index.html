@@ -18,6 +18,7 @@ function Launch()
     var id = document.isForm.id.value;
     var repoName = document.isForm.repoName.value;
     var repoType = document.isForm.repoType.value;
+    var branch = document.isForm.branch.value;
     
     if (id=="" && repoName=="")
     {
@@ -33,7 +34,8 @@ function Launch()
                         + sandoxId + "/" + sandbox + 
                         "/master?urlpath=git-pull?repo=https://github.com/" 
                         + id + "/" + repoName + 
-                        "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+                        "%26amp%3Bbranch=" 
+			+ branch + "%26amp%3Burlpath=lab/tree/" 
                         + repoName + "?autodecode";
         } 
         else if (repoType=="Private")
@@ -46,7 +48,8 @@ function Launch()
                             + token 
                             + "@github.com/" 
                             + id + "/" + repoName
-                            + "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+                            + "%26amp%3Bbranch=" 
+			    + branch + "%26amp%3Burlpath=lab/tree/" 
                             + repoName + "?autodecode";
         }
     }
@@ -154,6 +157,11 @@ div{
 	                <td>Repository name</td>
         	        <td><input name="repoName" value=""></td>
                 	</tr>
+
+	                <tr>
+        	        <td>Branch</td>
+                	<td><input name="branch" value="master"></td>
+	                </tr>
 
 	                <tr>
         	        <td>Repository type</td>
