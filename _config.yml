@@ -1,6 +1,5 @@
 theme: jekyll-theme-cayman
 title: yc14e's Web App Collection
 description: My Learning Path Towards Full Stack Developer
-google_analytics:
 github:
   is_project_page: true
