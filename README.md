@@ -1,4 +1,6 @@
-## [Launch JupyterLab in the Cloud](https://yc14e.github.io/jupyterlab-launcher)
+## Launch JupyterLab in the Cloud
+
+#### [Launch the App](https://yc14e.github.io/jupyterlab-launcher) or [View on GitHub](https://github.com/yc14e/jupyterlab-launcher)
 
 Open any GitHub repositories in a ready-to-code JupyterLab workspace in the cloud! Yes, even a private one.
 
