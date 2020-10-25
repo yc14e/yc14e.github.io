@@ -1,12 +1,15 @@
 ## [Launch JupyterLab in the Cloud](https://yc14e.github.io/jupyterlab-launcher)
 
-While Binder supports JupyterLab, [mybinder.org](https://mybinder.org/) only generates links to open repositories in the classic Jupyter Notebook interface. Through this website you can launch a JupyterLab session in the cloud and pull source from any GitHub repo into the workspace. 
+Launch a JupyterLab session in the cloud and pull source from any GitHub repo into the workspace! 
+
+While Binder supports JupyterLab, [mybinder.org](https://mybinder.org/) only generates links to open repositories in the classic Jupyter Notebook interface. This app is to fill the gap. 
+
 
 ## [Jupyter Notebook to PDF Converter](https://yc14e.github.io/nb2pdf)
 
-Many platforms such as CoCalc, Code Ocean, and Google Colab, let you edit Jupyter notebooks in the cloud, but, to my best knowledge, at the time of this writing, no platform lets you compile them into PDF files (if you know of one please [let me know](https://github.com/yc14e/yc14e.github.io/issues)). I build this web app to fill the gap. 
+You will be surprised to learn this is the first web app to compile Jupyter notebooks into PDF files through LaTeX. I only host it on Binder so it takes a few seconds to launch. 
 
-Binder lets you edit Jupyter notebooks and export compiled PDFs, but only if you know how to set it up. Good news is I've done that for you. Just check out the above JupyterLab Launcher. 
+Many platforms such as CoCalc, Code Ocean, and Google Colab, let you edit Jupyter notebooks in the cloud, but, to my best knowledge, at the time of this writing, no platform also lets you compile them into PDF files (if you know of one please [let me know](https://github.com/yc14e/yc14e.github.io/issues)). Binder lets you edit Jupyter notebooks and export compiled PDFs, but only if you know how to set it up. Good news is I've done that for you. Just check out the JupyterLab Launcher above. 
 
 
 ## [QuantCalc Financial Math Calculator](https://yc14e.github.io/quantcalc-net)
