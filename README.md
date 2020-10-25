@@ -1,5 +1,3 @@
-# [yc14e's Web App Collection](https://yc14e.github.io/)
-
 ## [Launch JupyterLab in the Cloud](https://yc14e.github.io/jupyterlab-launcher)
 
 While Binder supports JupyterLab, [mybinder.org](https://mybinder.org/) only generates links to open repositories in the classic Jupyter Notebook interface. Through this website you can launch a JupyterLab session in the cloud and pull source from any GitHub repo into the workspace. 
