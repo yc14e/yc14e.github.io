@@ -1,3 +1,4 @@
 # yc14e's Web App Collection
 
-* It's empty now
+.. image:: logo/quantcalc.png
+   :width: 100px
