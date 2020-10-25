@@ -3,4 +3,4 @@ title: yc14e's Web App Collection
 description: My Learning Path Towards Full Stack Developer
 google_analytics:
 github:
-  repository_url: https://github.com/yc14e/yc14e.github.io
+  is_project_page: true
