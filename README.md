@@ -1,4 +1,3 @@
-# yc14e's Web App Collection
 
 Each of the following is also an open-source project. Welcome to check out [my GitHub repositories](https://github.com/yc14e?tab=repositories). 
 
