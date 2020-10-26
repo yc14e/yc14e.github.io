@@ -1,5 +1,5 @@
 
-Each of the following is also an open-source project. Welcome to check out [my GitHub repositories](https://github.com/yc14e?tab=repositories). 
+Each of the following is in a separate repository. Welcome to check out [my GitHub repositories](https://github.com/yc14e?tab=repositories). 
 
 
 ## [Launch JupyterLab in the Cloud](https://yc14e.github.io/jupyterlab-launcher)
