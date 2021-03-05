@@ -13,7 +13,7 @@ While Binder supports JupyterLab, [mybinder.org](https://mybinder.org/) only gen
 
 You will be surprised to learn this is the first web app to compile Jupyter notebooks into PDF files through LaTeX. 
 
-In many cloud platforms you can edit Jupyter notebooks but you can't export them as PDF files. If you are used to one of those platforms, this app is right for you. I only host this app on Binder so it may take a few seconds to launch. 
+In many cloud platforms you can edit Jupyter notebooks but you can't export them as PDF files. If you are used to one of those platforms, this app is right for you. For now I only host this app on Binder and sometimes it might take a minute to launch. 
 
 
 ## [QuantCalc Financial Math Calculators](https://yc14e.github.io/quantcalc-net)
