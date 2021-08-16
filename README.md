@@ -22,3 +22,6 @@ Online calculators pricing and hedging financial derivatives in various asset cl
 cumulative hits before its migration to GitHub Pages. This is purely static, implemented in JavaScript. 
 
 
+## [The PyMinimax Python Package](https://pyminimax.readthedocs.io/en/latest/)
+
+PyMinimax is a Python implementation of minimax linkage hierarchical clustering, a powerful modern clustering algorithm that is not currently available in SciPy nor scikit-learn. Available through `pip install`.
